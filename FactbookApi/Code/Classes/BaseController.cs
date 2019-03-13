@@ -10,8 +10,6 @@ namespace FactbookApi.Code.Classes
 {
     public abstract class BaseController<T, TContext> : ControllerBase
         where T : class, IIdentifiable
-        //where TItemView: IView<T>, new()
-        //where TListView: IView<T>, new()
         where TContext: DbContext
     {
         #region Private Declarations
@@ -196,10 +194,6 @@ namespace FactbookApi.Code.Classes
         #region Abstract Methods
 
         protected abstract DataAccess<T> LoadDataAccess();
-        
-
-
-
         protected abstract Func<int, T> GetItemFunction();
         protected abstract Func<IEnumerable<T>> GetItemsFunction();
         protected abstract Func<T, bool> GetExistsFunc(int id);
