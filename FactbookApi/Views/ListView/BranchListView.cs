@@ -4,7 +4,9 @@ namespace FactbookApi.Views.ListView
 {
     public class BranchListView : BranchView
     {
-        public string BranchType => ViewObject.BranchType.Type;
-        public string ArmedForce => ViewObject.ArmedForce.Name;
+        public new string BranchType => ViewObject.BranchType?.Type;
+        public new string ArmedForce => ViewObject.ArmedForce?.Name;
+        public new int BranchFlags => ViewObject.BranchFlags.Count;
+        public new int Flags => ViewObject.Flags.Count;
     }
 }

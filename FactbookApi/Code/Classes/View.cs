@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FactbookApi.Code.Classes
 {
-    public class View<T> : IView<T>
+    public abstract class View<T> : IView<T>, IListName
     {
         public View() { }
 
@@ -15,6 +15,8 @@ namespace FactbookApi.Code.Classes
 
         [JsonIgnore]
         public T ViewObject { get; set; }
+
+        public abstract string ListName { get; }
 
         protected ICollection<TView> GetViewList<TView, TObject>(IEnumerable<TObject> list)
             where TView : IView<TObject>, new()

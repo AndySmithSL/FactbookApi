@@ -77,7 +77,8 @@ namespace FactbookApi.Controllers
         {
             return () => Context
                         .ShipCategory
-                        .Include(x => x.ShipTypes).ThenInclude(x => x.ShipSubTypes);
+                        .Include(x => x.ShipTypes).ThenInclude(x => x.ShipSubTypes)
+                        .AsEnumerable();
         }
 
         protected override Func<ShipCategory, bool> GetExistsFunc(int id)

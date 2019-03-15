@@ -23,34 +23,40 @@ namespace FactbookApi.Views.Base
 
         #region Foreign Properties
 
-        //[JsonIgnore]
-        //public BranchTypeView BranchType => GetView<BranchTypeView, BranchType>(ViewObject.BranchType);
+        [JsonIgnore]
+        public BranchTypeView BranchType => GetView<BranchTypeView, BranchType>(ViewObject.BranchType);
 
-        //[JsonIgnore]
-        //public ArmedForceView ArmedForce => GetView<ArmedForceView, ArmedForce>(ViewObject.ArmedForce);
+        [JsonIgnore]
+        public ArmedForceView ArmedForce => GetView<ArmedForceView, ArmedForce>(ViewObject.ArmedForce);
 
+        [JsonIgnore]
+        public ICollection<BranchFlagView> BranchFlags => GetViewList<BranchFlagView, BranchFlag>(ViewObject.BranchFlags);
 
-        //public ICollection<BranchFlagView> BranchFlags => GetViewList<BranchFlagView, BranchFlag>(ViewObject.BranchFlags);
-        //public ICollection<ShipServiceView> ShipServices => GetViewList<ShipServiceView, ShipService>(ViewObject.ShipServices);
+        [JsonIgnore]
+        public ICollection<ShipServiceView> ShipServices => GetViewList<ShipServiceView, ShipService>(ViewObject.ShipServices);
 
         #endregion Foreign Properties
 
         #region Other Properties
 
-        //public bool HasFlag => Flags.Count > 0;
+        [JsonIgnore]
+        public ICollection<FlagView> Flags => GetViewList<FlagView, Flag>(ViewObject.Flags);
 
-        //public ICollection<FlagView> Flags => BranchFlags.Select(f => f.Flag).Distinct(f => f.Id).ToList();
+        public bool HasFlag => Flags.Count > 0;
 
-        //public FlagView CurrentFlag => Flags.OrderByDescending(x => x.StartDate).FirstOrDefault();
+        [JsonIgnore]
+        public FlagView CurrentFlag => Flags.OrderByDescending(x => x.StartDate).FirstOrDefault();
 
-        //public string ImageSource => CurrentFlag?.ImageSource;
+        public string ImageSource => CurrentFlag?.ImageSource;
+        public string Image => CurrentFlag?.Image;
 
-        //public string Image => CurrentFlag?.Image;
+        public override string ListName => Name + ":" + ArmedForce?.Name;
 
         #endregion Other Properties
 
         #region Methods
 
+        //TODO: AS sort flags
         //public FlagView GetFlagByDate(DateTime date)
         //{
         //    if (BranchFlags.Count > 0)

@@ -70,8 +70,10 @@ namespace FactbookApi.Controllers
         {
             return id => Context
                         .Branch
-                        .Include(x => x.ArmedForce).ThenInclude(x => x.Branches)
                         .Include(x => x.BranchType).ThenInclude(x => x.Branches)
+                        .Include(x => x.ArmedForce).ThenInclude(x => x.Branches)
+                        .Include(x => x.ArmedForce).ThenInclude(x => x.ArmedForceFlags).ThenInclude(x => x.Flag)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Flag)
                         .FirstOrDefault(x => x.Id == id);
         }
 
@@ -81,6 +83,7 @@ namespace FactbookApi.Controllers
                         .Branch
                         .Include(x => x.ArmedForce)
                         .Include(x => x.BranchType)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Flag)
                         .AsEnumerable();
         }
 

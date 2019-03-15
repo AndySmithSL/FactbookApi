@@ -71,6 +71,9 @@ namespace FactbookApi.Controllers
             return id => Context
                         .Flag
                         .Include(x => x.ArmedForceFlags).ThenInclude(x => x.ArmedForce).ThenInclude(x => x.Branches)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Branch).ThenInclude(x => x.ArmedForce)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Branch).ThenInclude(x => x.BranchType)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Branch).ThenInclude(x => x.BranchFlags).ThenInclude(x => x.Flag)
                         .FirstOrDefault(x => x.Id == id);
         }
 
@@ -79,6 +82,7 @@ namespace FactbookApi.Controllers
             return () => Context
                         .Flag
                         .Include(x => x.ArmedForceFlags).ThenInclude(x => x.ArmedForce)
+                        .Include(x => x.BranchFlags).ThenInclude(x => x.Branch)
                         .AsEnumerable();
         }
 

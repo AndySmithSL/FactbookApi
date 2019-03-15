@@ -1,9 +1,9 @@
 ﻿using FactbookApi.Code.Interfaces;
-using System;
+using FactbookApi.Code.Util;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FactbookApi.Models
 {
@@ -13,8 +13,8 @@ namespace FactbookApi.Models
 
         public Branch()
         {
-            //BranchFlags = new HashSet<BranchFlag>();
-            //ShipServices = new HashSet<ShipService>();
+            BranchFlags = new HashSet<BranchFlag>();
+            ShipServices = new HashSet<ShipService>();
         }
 
         #endregion Constructor
@@ -42,18 +42,16 @@ namespace FactbookApi.Models
         #region Foreign Properties
 
         public ArmedForce ArmedForce { get; set; }
-
         public BranchType BranchType { get; set; }
-
-        //public ICollection<BranchFlag> BranchFlags { get; set; }
-
-        //public ICollection<ShipService> ShipServices { get; set; }
+        public ICollection<BranchFlag> BranchFlags { get; set; }
+        public ICollection<ShipService> ShipServices { get; set; }
 
         #endregion Foreign Properties
 
         #region Other Properties
 
-        //public ICollection<Flag> Flags => BranchFlags.Select(f => f.Flag).Distinct(f => f.Id).ToList();
+        [NotMapped]
+        public ICollection<Flag> Flags => BranchFlags.Select(f => f.Flag).Distinct(f => f.Id).ToList();
 
         #endregion Other Properties
     }

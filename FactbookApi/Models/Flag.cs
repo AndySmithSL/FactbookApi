@@ -15,7 +15,7 @@ namespace FactbookApi.Models
         public Flag()
         {
             ArmedForceFlags = new HashSet<ArmedForceFlag>();
-            //BranchFlags = new HashSet<BranchFlag>();
+            BranchFlags = new HashSet<BranchFlag>();
         }
 
         #endregion Constructor
@@ -36,11 +36,9 @@ namespace FactbookApi.Models
         [DataType(DataType.Text)]
         public string Description { get; set; }
 
-        [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         public DateTime? StartDate { get; set; }
 
-        [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
 
@@ -52,8 +50,7 @@ namespace FactbookApi.Models
         #region Foreign Properties
 
         public ICollection<ArmedForceFlag> ArmedForceFlags { get; set; }
-
-        //public ICollection<BranchFlag> BranchFlags { get; set; }
+        public ICollection<BranchFlag> BranchFlags { get; set; }
 
         #endregion Foreign Properties
 
@@ -61,6 +58,9 @@ namespace FactbookApi.Models
 
         [NotMapped]
         public ICollection<ArmedForce> ArmedForces => ArmedForceFlags.Select(f => f.ArmedForce).Distinct(f => f.Id).ToList();
+
+        [NotMapped]
+        public ICollection<Branch> Branches => BranchFlags.Select(f => f.Branch).Distinct(f => f.Id).ToList();
 
         #endregion Other Properties
     }

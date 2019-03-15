@@ -4,6 +4,6 @@ namespace FactbookApi.Views.ListView
 {
     public class BranchTypeListView : BranchTypeView
     {
-        public int Branches => ViewObject.Branches.Count;
+        public new int Branches => ViewObject.Branches.Count;
     }
 }

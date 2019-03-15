@@ -1,7 +1,6 @@
 ﻿using FactbookApi.Code.Classes;
 using FactbookApi.Code.Util;
 using FactbookApi.Models;
-using FactbookApi.Views.ListView;
 using Newtonsoft.Json;
 using System;
 
@@ -21,11 +20,11 @@ namespace FactbookApi.Views.Base
 
         #region Foreign Properties
 
-        //[JsonIgnore]
-        //public ArmedForceView ArmedForce => GetView<ArmedForceView, ArmedForce>(ViewObject.ArmedForce);
+        [JsonIgnore]
+        public ArmedForceView ArmedForce => GetView<ArmedForceView, ArmedForce>(ViewObject.ArmedForce);
 
-        //[JsonIgnore]
-        //public FlagView Flag => GetView<FlagView, Flag>(ViewObject.Flag);
+        [JsonIgnore]
+        public FlagView Flag => GetView<FlagView, Flag>(ViewObject.Flag);
 
         #endregion Foreign Properties
 
@@ -33,6 +32,14 @@ namespace FactbookApi.Views.Base
 
         public string StartLabel => CommonFunctions.GetDateLabel(Start);
         public string EndLabel => CommonFunctions.GetDateLabel(End);
+
+        [JsonIgnore]
+        public DateTime AbsoluteStart => Start.HasValue ? Start.Value : DateTime.MinValue;
+
+        [JsonIgnore]
+        public DateTime AbsoluteEnd => End.HasValue ? End.Value : DateTime.MaxValue;
+
+        public override string ListName => ArmedForce?.Name + ":" + Flag?.Name;
 
         #endregion Other Properties
     }

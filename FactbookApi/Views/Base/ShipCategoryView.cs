@@ -1,5 +1,7 @@
 ﻿using FactbookApi.Code.Classes;
 using FactbookApi.Models;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace FactbookApi.Views.Base
 {
@@ -12,7 +14,17 @@ namespace FactbookApi.Views.Base
 
         #endregion Database Properties
 
-        //[JsonIgnore]
-        //public ICollection<ShipTypeView> ShipTypes => GetViewList<ShipTypeView, ShipType>(ViewObject.ShipTypes);
+        #region Foreign Properties
+
+        [JsonIgnore]
+        public ICollection<ShipTypeView> ShipTypes => GetViewList<ShipTypeView, ShipType>(ViewObject.ShipTypes);
+
+        #endregion Foreign Properties
+
+        #region Other Properties
+
+        public override string ListName => Category;
+
+        #endregion Other Properties
     }
 }

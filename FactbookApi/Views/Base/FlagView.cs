@@ -1,12 +1,9 @@
 ﻿using FactbookApi.Code.Classes;
-using FactbookApi.Code.Interfaces;
 using FactbookApi.Code.Util;
 using FactbookApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FactbookApi.Views.Base
 {
@@ -33,16 +30,15 @@ namespace FactbookApi.Views.Base
 
         #region Foreign Properties
 
-        //[JsonIgnore]
-        //public ICollection<ArmedForceFlagView> ArmedForceFlags => GetViewList<ArmedForceFlagView, ArmedForceFlag>(ViewObject.ArmedForceFlags);
+        [JsonIgnore]
+        public ICollection<ArmedForceFlagView> ArmedForceFlags => GetViewList<ArmedForceFlagView, ArmedForceFlag>(ViewObject.ArmedForceFlags);
 
-        //public ICollection<BranchFlagView> BranchFlags => GetViewList<BranchFlagView, BranchFlag>(ViewObject.BranchFlags);
+        [JsonIgnore]
+        public ICollection<BranchFlagView> BranchFlags => GetViewList<BranchFlagView, BranchFlag>(ViewObject.BranchFlags);
 
         #endregion Foreign Properties
 
         #region Other Properties
-
-        //public override string ListName => Name + " : " + Code;
 
         public string Image => Code + FLAG_EXTENSION;
         public string ImageSource => FLAG_PATH + Image;
@@ -50,16 +46,14 @@ namespace FactbookApi.Views.Base
         public string StartDateLabel => CommonFunctions.GetDateLabel(StartDate);
         public string EndDateLabel => CommonFunctions.GetDateLabel(EndDate);
 
-        //public ICollection<ArmedForceView> ArmedForces => ArmedForceFlags.Select(f => f.ArmedForce).Distinct(f => f.Id).ToList();
+        [JsonIgnore]
+        public DateTime AbsoluteStart => StartDate.HasValue ? StartDate.Value : DateTime.MinValue;
 
-       // public ICollection<BranchView> Branches => BranchFlags.Select(f => f.Branch).Distinct(f => f.Id).ToList();
+        [JsonIgnore]
+        public DateTime AbsoluteEnd => EndDate.HasValue ? EndDate.Value : DateTime.MaxValue;
+
+        public override string ListName => Name + ":" + Code;
 
         #endregion Other Properties
-
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

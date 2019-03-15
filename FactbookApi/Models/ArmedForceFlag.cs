@@ -6,6 +6,12 @@ namespace FactbookApi.Models
 {
     public class ArmedForceFlag : IIdentifiable
     {
+        #region Constructor
+
+        public ArmedForceFlag() { }
+
+        #endregion Constructor
+
         #region Database Properties
 
         [Key]
@@ -28,7 +34,6 @@ namespace FactbookApi.Models
         #region Foreign Properties
 
         public ArmedForce ArmedForce { get; set; }
-
         public Flag Flag { get; set; }
 
         #endregion Foreign Properties

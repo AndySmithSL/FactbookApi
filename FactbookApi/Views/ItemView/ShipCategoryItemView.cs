@@ -7,6 +7,6 @@ namespace FactbookApi.Views.ItemView
 {
     public class ShipCategoryItemView : ShipCategoryView
     {
-        public ICollection<ShipTypeListView> ShipTypes => GetViewList<ShipTypeListView, ShipType>(ViewObject.ShipTypes);
+        public new ICollection<ShipTypeListView> ShipTypes => GetViewList<ShipTypeListView, ShipType>(ViewObject.ShipTypes);
     }
 }

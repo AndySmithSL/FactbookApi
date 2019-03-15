@@ -17,8 +17,8 @@ namespace FactbookApi.Views.Base
 
         #region Foreign Properties
 
-        //[JsonIgnore]
-        //public ICollection<BranchView> Branches => GetViewList<BranchView, Branch>(ViewObject.Branches);
+        [JsonIgnore]
+        public ICollection<BranchView> Branches => GetViewList<BranchView, Branch>(ViewObject.Branches);
 
         #endregion Foreign Properties
 
@@ -27,11 +27,8 @@ namespace FactbookApi.Views.Base
         public string IconLight => Code + "-light.png";
         public string IconDark => Code + "-dark.png";
 
+        public override string ListName => Type + ":" + Code;
+
         #endregion Other Properties
-
-
-
-        //public override string ListName => Type + ":" + Code;
-
     }
 }

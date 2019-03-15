@@ -70,7 +70,9 @@ namespace FactbookApi.Controllers
             return id => Context
                         .ArmedForceFlag
                         .Include(x => x.ArmedForce).ThenInclude(x => x.Branches)
-                        .Include(x => x.Flag)
+                        .Include(x => x.ArmedForce).ThenInclude(x => x.ArmedForceFlags)
+                        .Include(x => x.Flag).ThenInclude(x => x.ArmedForceFlags)
+                        .Include(x => x.Flag).ThenInclude(x => x.BranchFlags)
                         .FirstOrDefault(x => x.Id == id);
         }
 

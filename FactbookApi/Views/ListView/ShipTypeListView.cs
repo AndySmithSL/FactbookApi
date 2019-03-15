@@ -4,7 +4,7 @@ namespace FactbookApi.Views.ListView
 {
     public class ShipTypeListView : ShipTypeView
     {
-        public string ShipCategory => ViewObject.ShipCategory.Category;
-        public int ShipSubTypes => ViewObject.ShipSubTypes.Count;
+        public new string ShipCategory => ViewObject.ShipCategory.Category;
+        public new int ShipSubTypes => ViewObject.ShipSubTypes.Count;
     }
 }

@@ -32,7 +32,6 @@ namespace FactbookApi.Models
         #region Foreign Properties
 
         public ShipCategory ShipCategory { get; set; }
-
         public ICollection<ShipSubType> ShipSubTypes { get; set; }
 
         #endregion Foreign Properties

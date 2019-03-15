@@ -7,6 +7,6 @@ namespace FactbookApi.Views.ItemView
 {
     public class BranchTypeItemView : BranchTypeView
     {
-        public ICollection<BranchListView> Branches => GetViewList<BranchListView, Branch>(ViewObject.Branches);
+        public new ICollection<BranchListView> Branches => GetViewList<BranchListView, Branch>(ViewObject.Branches);
     }
 }

@@ -1,13 +1,8 @@
 ﻿using FactbookApi.Code.Classes;
-using FactbookApi.Code.Interfaces;
 using FactbookApi.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using FactbookApi.Code.Util;
-using FactbookApi.Views.ListView;
 
 namespace FactbookApi.Views.Base
 {
@@ -25,11 +20,11 @@ namespace FactbookApi.Views.Base
 
         #region Foreign Properties
 
-        //[JsonIgnore]
-        //public ICollection<ArmedForceFlagView> ArmedForceFlags => GetViewList<ArmedForceFlagView, ArmedForceFlag>(ViewObject.ArmedForceFlags);
+        [JsonIgnore]
+        public ICollection<ArmedForceFlagView> ArmedForceFlags => GetViewList<ArmedForceFlagView, ArmedForceFlag>(ViewObject.ArmedForceFlags);
 
-        //[JsonIgnore]
-        //public ICollection<BranchView> Branches => GetViewList<BranchView, Branch>(ViewObject.Branches);
+        [JsonIgnore]
+        public ICollection<BranchView> Branches => GetViewList<BranchView, Branch>(ViewObject.Branches);
 
         #endregion Foreign Properties
 
@@ -42,11 +37,16 @@ namespace FactbookApi.Views.Base
 
         //TODO: AS needs to be more intelligent than this, i.e. get flags by dates
         [JsonIgnore]
-        public FlagView Flag => Flags.OrderByDescending(x => x.StartDate).FirstOrDefault();
+        public FlagView CurrentFlag => Flags.OrderByDescending(x => x.StartDate).FirstOrDefault();
 
-        public string ImageSource => Flag?.ImageSource;
+        [JsonIgnore]
+        public FlagView DefaultFlag => Flags.OrderByDescending(x => x.StartDate).FirstOrDefault();
+
+        public string ImageSource => CurrentFlag?.ImageSource;
 
         public string BudgetLabel => Budget.HasValue ? "$" + Budget.Value.ToString("N0") : "--";
+
+        public override string ListName => Name + ":" + Code;
 
         #endregion Other Properties
     }
