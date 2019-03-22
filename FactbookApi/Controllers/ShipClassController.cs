@@ -70,19 +70,17 @@ namespace FactbookApi.Controllers
         {
             return id => Context
                         .ShipClass
-                        .Include(x => x.PrecedingClasses).ThenInclude(x => x.PrecedingShipClass)
+                        .Include(x => x.ShipServices).ThenInclude(x => x.Ship).ThenInclude(x => x.Builder)
+                        .Include(x => x.ShipServices).ThenInclude(x => x.ShipSubType).ThenInclude(x => x.ShipType).ThenInclude(x => x.ShipCategory)
+                        .Include(x => x.ShipServices).ThenInclude(x => x.Branch).ThenInclude(x => x.BranchType)
+                        .Include(x => x.ShipServices).ThenInclude(x => x.Branch).ThenInclude(x => x.ArmedForce)
+                        .Include(x => x.ShipServices).ThenInclude(x => x.Branch).ThenInclude(x => x.BranchFlags).ThenInclude(x => x.Flag)
+                        .Include(x => x.PrecedingClasses).ThenInclude(x => x.PrecedingShipClass).ThenInclude( x=> x.ShipServices).ThenInclude(x => x.Ship)
                         .Include(x => x.PrecedingClasses).ThenInclude(x => x.SucceedingShipClass)
                         .Include(x => x.SucceedingClasses).ThenInclude(x => x.PrecedingShipClass)
-                        .Include(x => x.SucceedingClasses).ThenInclude(x => x.SucceedingShipClass)
-                        .Include(x => x.ShipServices).ThenInclude(x => x.Branch)
-                        .Include(x => x.ShipServices).ThenInclude(x => x.ShipSubType)
-                        .Include(x => x.ShipServices).ThenInclude(x => x.Ship)
-                        //.Include(x => x.ShipServices).ThenInclude(x => x.ShipClass)
+                        .Include(x => x.SucceedingClasses).ThenInclude(x => x.SucceedingShipClass).ThenInclude(x => x.ShipServices).ThenInclude(x => x.Ship)
                         .FirstOrDefault(x => x.Id == id);
         }
-
-        //public ShipClass PrecedingShipClass { get; set; }
-        //public ShipClass SucceedingShipClass { get; set; }
 
         protected override Func<IEnumerable<ShipClass>> GetItemsFunction()
         {

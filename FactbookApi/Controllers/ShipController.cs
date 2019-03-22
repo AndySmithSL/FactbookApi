@@ -78,8 +78,6 @@ namespace FactbookApi.Controllers
                         .Include(x => x.ShipServices).ThenInclude(x => x.Branch).ThenInclude(x => x.BranchType)
                         .Include(x => x.ShipServices).ThenInclude(x => x.Branch).ThenInclude(x => x.ArmedForce)
                         .Include(x => x.ShipServices).ThenInclude(x => x.Ship)
-                        //.Include(x => x.ShipServices)
-                        //.Include(x => x.Builder).ThenInclude(x => x.Ships)
                         .FirstOrDefault(x => x.Id == id);
         }
 
